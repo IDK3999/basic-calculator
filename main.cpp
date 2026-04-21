@@ -1,6 +1,7 @@
 #include <fstream>
 #include <cstring>
 #include <vector>
+#include <string>
 using namespace std;
 ifstream cin("input.txt");
 ofstream cout("output.txt");
@@ -18,12 +19,13 @@ int main() {
     vector <char> operators_in_str;
     int i = 0;
     while (i < strlen(str)){
-        if(isdigit(str[i])){
-            int num = 0;
-            while (i < strlen(str) && isdigit(str[i])){
-                num = num * 10 + (str[i] - '0');
+        if(isdigit(str[i]) || str[i] == '.'){
+            string num_str = "";
+            while (i < strlen(str) && (isdigit(str[i]) || str[i] == '.')){
+                num_str += str[i];
                 i++;
             }
+            double num = stod(num_str);
             numbers_in_str.push_back(num);
         } else {
             if(str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/'){
